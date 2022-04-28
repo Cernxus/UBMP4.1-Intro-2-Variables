@@ -37,24 +37,22 @@ int main(void)
     // Code in this while loop runs repeatedly.
     while(1)
 	{
-        // Count SW2 button presses
-        if(SW2 == 0)
+        // Count new SW2 button presses
+        if(SW2 == 0 && SW2Pressed == false)
         {
             LED3 = 1;
-            SW2Count = SW2Count + 1;
+            SW2Pressed = true;
+            if(SW2Count < 255)
+            {
+                SW2Count = SW2Count + 1;
+            }
         }
-        else
+
+        // Clear pressed state if released
+        if(SW2 == 1)
         {
             LED3 = 0;
-        }
-        
-        if(SW2Count >= maxCount)
-        {
-            LED4 = 1;
-        }
-        else
-        {
-            LED4 = 0;
+            SW2Pressed = false;
         }
         
         // Reset count and turn off LED D4
@@ -91,7 +89,7 @@ int main(void)
  *    this, using a separate statement above the main code, rather than just
  *    embedding the value of the constant where it is needed in the code?
   
- - The advantage of using Constant is it can make it more readable. 
+ - The advantage of using Constant is it can make it more manageable  
 
  * 3. This program should light LED D3 every time SW2 is pressed, and light
  *    LED D4 once the count reaches 50. Try it, and count how many times you
@@ -120,7 +118,7 @@ int main(void)
  *    value of the SW2Count variable? Can you explain what happens to the
  *    SW2Count variable as the SW2 button is held?
 
- - 
+ - The SW2Count Variables allows it to set a condition where when it reaches a certain time it will make LED D4 blink. While holding SW2 button, LED 4 would start blinking and when you let go of SW2, if LED D4 is still on then the moment you let go of SW2 the light would still stay on and stop blinking. Same goes for when LED D4 is off.
  
  * 5. We can set a limit on the SW2Count variable by encapsulating its increment
  *    statement inside a conditional statement. In your program, replace the
@@ -136,7 +134,9 @@ int main(void)
  *    but in a more compact form. After adding this code, what is the maximum
  *    value that the SW2Count variable will reach? How does this affect the
  *    operation of LED D4 when SW2 is held?
- *
+
+ - The maximun value is still 255. Nothing has change when holding SW2.
+ 
  * 6. The fundamental problem with this program is that pushbutton SW2 is sensed
  *    in each cycle of the loop, and if its state is read as pressed, another
  *    count is added to the SW2Count variable. The program needs to be made to
@@ -182,6 +182,8 @@ int main(void)
  *    The '!SW2Pressed' expression is read as 'not SW2Pressed' and is equivalent
  *    to SW2Pressed being false. Similarly, using the variable name by itself
  *    (eg. SW2Pressed) in a condition is equivalent to SW2Pressed being true.
+ 
+ - 
  * 
  * 7. A pushbutton's logic state can also be defined as a word in a similar way
  *    to a variable (eg. the way SW2Pressed represents 1 or 0, or true or false)
