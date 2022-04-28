@@ -52,6 +52,10 @@ int main(void)
         {
             LED4 = 1;
         }
+        else
+        {
+            LED4 = 0;
+        }
         
         // Reset count and turn off LED D4
         if(SW3 == 0)
@@ -78,13 +82,17 @@ int main(void)
  *    What is the the maximum value an 8-bit variable can store? What are some
  *    of the benefits and drawbacks of using 8-bit variables in an 8-bit
  *    microcontroller?
- * 
+
+ - The maximum value it can store is around 255. The benifits of using an 8-bit variables ina n 8-bit microcontroller is that it can handle the 8-bit program. The drawback is that it limited to at most 8-bit.
+
  * 2. The constant 'maxCount' is defined using a declaration similar to that
  *    used for the SW2Count variable, but with the 'const' prefix added in the
  *    declaration. Can you think of some advantages of declaring a constant like
  *    this, using a separate statement above the main code, rather than just
  *    embedding the value of the constant where it is needed in the code?
- * 
+  
+ - The advantage of using Constant is it can make it more readable. 
+
  * 3. This program should light LED D3 every time SW2 is pressed, and light
  *    LED D4 once the count reaches 50. Try it, and count how many times you
  *    have to press the button until LED D4 turns on. SW3 resets the count so
@@ -92,7 +100,9 @@ int main(void)
  * 
  *    Did your count reach 50? Can you describe what the program is doing?
  *    (Hint: try pressing and releasing the button at different rates of speed.)
- * 
+
+ - No, it did not reach 50, it takes about 4 times until LED D4 lights up. The programs sets a condition where it needs to reach a certain count in order for something to activate.
+ 
  * 4. Modify the second 'if' structure to add the else block, as shown below:
 
         if(SW2Count >= maxCount)
@@ -109,7 +119,9 @@ int main(void)
  *    higher than maxCount. If LED D4 turns off, what can you infer about the
  *    value of the SW2Count variable? Can you explain what happens to the
  *    SW2Count variable as the SW2 button is held?
- * 
+
+ - 
+ 
  * 5. We can set a limit on the SW2Count variable by encapsulating its increment
  *    statement inside a conditional statement. In your program, replace the
  *    line 'SW2Count = SW2Count + 1;' with the code, below:
