@@ -34,25 +34,23 @@ int main(void)
     OSC_config();               // Configure internal oscillator for 48 MHz
     UBMP4_config();             // Configure on-board UBMP4 I/O devices
 	
-    // Code in this while loop runs repeatedly.
+     // Code in this while loop runs repeatedly.
     while(1)
 	{
-        // Count new SW2 button presses
-        if(SW2 == 0 && SW2Pressed == false)
+        // Count SW2 button presses
+        if(SW2 == 0)
         {
             LED3 = 1;
-            SW2Pressed = true;
-            if(SW2Count < 255)
-            {
-                SW2Count = SW2Count + 1;
-            }
+            SW2Count = SW2Count + 1;
         }
-
-        // Clear pressed state if released
-        if(SW2 == 1)
+        else
         {
             LED3 = 0;
-            SW2Pressed = false;
+        }
+        
+        if(SW2Count >= maxCount)
+        {
+            LED4 = 1;
         }
         
         // Reset count and turn off LED D4
@@ -231,7 +229,9 @@ int main(void)
  *    second palyer wins. Use a logical condition statement to reset the game
  *    by clearing the count and turning off the LEDs if either SW3 or SW4 is
  *    pressed.
- * 
+  
+ - 
+
  * 2. Use your knowledge of Boolean variables and logical conditions to simulate
  *    a toggle button. Each new press of the toggle button will 'toggle' an LED
  *    to its opposite state. (Toggle buttons are commonly used as push-on, 
